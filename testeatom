@@ -1,0 +1,12 @@
+SELECT   a.pk_tabela_pai
+FROM     dbo.tabela_pai   a
+LEFT JOIN dbo.tabela_filha b
+ON       a.pk_tabela_pai   = b.fk_tabela_filha
+WHERE    b.fk_tabela_filha IS NULL
+GO
+SELECT   a.pk_tabela_pai
+FROM     dbo.tabela_pai a
+WHERE NOT EXISTS(SELECT *
+                FROM   dbo.tabela_filha b
+WHERE  a.pk_tabela_pai
+       b.fk_tabela_filha)
